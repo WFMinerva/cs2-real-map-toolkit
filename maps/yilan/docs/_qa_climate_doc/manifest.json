@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "libreoffice",
+  "source": "saved",
+  "inputPath": "<repo>\\maps\\yilan\\docs\\依兰气候-填值对照表.docx",
+  "sourceSha256": "f749598a2ff82564825da9ef5e4affa3b49a672def98b2e8ec7892d08e866311",
+  "dpi": 110,
+  "pageCount": 4,
+  "images": [
+    {
+      "index": 1,
+      "page": 1,
+      "path": "<repo>\\maps\\yilan\\docs\\_qa_climate_doc\\page-0001.png",
+      "width": 910,
+      "height": 1287,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 63554
+    },
+    {
+      "index": 2,
+      "page": 2,
+      "path": "<repo>\\maps\\yilan\\docs\\_qa_climate_doc\\page-0002.png",
+      "width": 910,
+      "height": 1287,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 59019
+    },
+    {
+      "index": 3,
+      "page": 3,
+      "path": "<repo>\\maps\\yilan\\docs\\_qa_climate_doc\\page-0003.png",
+      "width": 910,
+      "height": 1287,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 56737
+    },
+    {
+      "index": 4,
+      "page": 4,
+      "path": "<repo>\\maps\\yilan\\docs\\_qa_climate_doc\\page-0004.png",
+      "width": 910,
+      "height": 1287,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 65827
+    }
+  ],
+  "missingFonts": [
+    "Courier"
+  ]
+}

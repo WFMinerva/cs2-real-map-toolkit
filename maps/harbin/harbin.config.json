@@ -1,0 +1,63 @@
+{
+  "map_id": "harbin",
+  "display_name": "哈尔滨",
+  "center": { "lon": 126.620, "lat": 45.755 },
+  "bounds": { "left": 126.5277, "right": 126.7123, "bottom": 45.6905, "top": 45.8195 },
+  "epsg": "EPSG:32652",
+  "playable": { "px": 4096, "m_per_px": 3.5 },
+  "world": { "px": 4096, "m_per_px": 14.0 },
+  "height_scale_m": 4096.0,
+  "sea_level_m": 113.5,
+  "water": {
+    "extract_bbox_swnw": [45.49, 126.25, 46.02, 127.00],
+    "classes": ["riverbank", "water", "reservoir", "wetland", "wetland_marsh", "wetland_swamp"],
+    "shore_model": {
+      "note": "社区标准岸线模型（Terraining Heightmap Generator 口径）；06 的统一8m与17的700m渐变均已被此版替代",
+      "water_depth_m": 2.5,
+      "riparian_m": 10.0,
+      "profile_sine": [0.024, 0.095, 0.206, 0.345, 0.5, 0.655, 0.794, 0.905, 0.976],
+      "surface_tol_m": 1.0
+    },
+    "world_classes": ["water", "reservoir", "riverbank", "wetland", "wetland_marsh", "wetland_swamp", "basin"],
+    "world_depth_m": 2.5,
+    "world_tol_m": 8.0,
+    "world_way_width_m": { "river": 70.0, "canal": 30.0, "stream": 12.0, "drain": 8.0 },
+    "riverbed_depth_below_sea_m": 2.0
+  },
+  "notes_riverbed": "河道判定水位 = 海平面 − riverbed_depth_below_sea_m（建模参数，与岸线模型主槽一致）。旧『bed<107』是 06 统一8m挖深时代的绝对阈值口径，已废弃；不要再用写死绝对高程的占位值。",
+  "dem": {
+    "source": "Copernicus DEM GLO-30 (AWS open data, tile N45_E126)",
+    "source_water": "Geofabrik heilongjiang-latest-free.shp.zip / gis_osm_water_a_free_1.shp",
+    "tiles": ["N45_00_E126_00", "N46_00_E126_00"]
+  },
+  "region_shp": "maps/harbin/data/osm_hlj",
+  "region_zip": "data_common/heilongjiang-latest-free.shp.zip",
+  "roads_bounds": {
+    "note": "Earth2Cities 导入实际生效的四至（第 5-6 位小数有别于 terrain 链的圆整 bounds）；28 抬桥数据必须用这一组",
+    "left": 126.5277,
+    "right": 126.7123,
+    "bottom": 45.69061,
+    "top": 45.81939
+  },
+  "roads_trim_m": 6500.0,
+  "roads_boundary_guard_m": 600.0,
+  "bridge_lift": { "clearance_m": 10.0, "ramp_length_m": 160.0, "min_c_m": 0.15, "match_radius_m": 2.5 },
+  "files": {
+    "water_geojson": "maps/harbin/data/water_in_box.geojson",
+    "mask_npz": "maps/harbin/data/mask_playable.npz",
+    "playable_png": "maps/harbin/products/harbin_playable.png",
+    "world_png": "maps/harbin/products/harbin_world.png",
+    "build_meta": "maps/harbin/products/build_meta.json",
+    "preview_playable": "maps/harbin/products/preview_playable.png",
+    "preview_world": "maps/harbin/products/preview_world.png",
+    "verify_hillshade": "maps/harbin/products/verify_hillshade.png",
+    "river_edges": "maps/harbin/products/river_edges.json",
+    "world_river_edges": "maps/harbin/products/world_river_edges.json",
+    "backdrop_sources_md": "maps/harbin/products/画外水源放置表.md",
+    "roads_osm_full": "maps/harbin/data/roads/overpass_roads_FULL.osm",
+    "roads_trimmed": "maps/harbin/data/roads/overpass_roads_trimmed.osm",
+    "bridges_lift": "maps/harbin/bridge/bridges_lift.json",
+    "nasa_daily": "maps/harbin/products/nasa_daily_harbin.json"
+  },
+  "deploy": { "auto_deploy_heightmaps": true }
+}

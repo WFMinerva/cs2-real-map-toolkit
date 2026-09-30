@@ -1,0 +1,7 @@
+# CS2 map workshop Python 依赖（从旧工作区 venv 实测版本锁定，Python 3.14）
+# 重建：<python>\python.exe -m venv .venv && .venv\Scripts\python.exe -m pip install -r requirements.txt
+numpy==2.5.3
+pillow==12.3.0
+pyshp==3.1.6
+rasterio==1.5.1
+zstandard==0.25.0

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    离线元数据读取器：直接读游戏程序集，dump 结构体真实字段。
+    为什么不用反射加载：Game.dll 依赖 Unity 运行时，LoadFrom 会失败；
+    MetadataLoadContext 只读元数据、不求值，安全且完整。
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>TypeDump</AssemblyName>
+    <RootNamespace>TypeDump</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>

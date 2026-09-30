@@ -1,0 +1,15 @@
+{
+  "_comment": "复制本文件为 config/game.json 并填自己的路径（game.json 已被 .gitignore 忽略，不要提交本机路径）。",
+  "game_install": "D:\\SteamLibrary\\steamapps\\common\\Cities Skylines II",
+  "user_data": "%USERPROFILE%\\AppData\\LocalLow\\Colossal Order\\Cities Skylines II",
+  "cs2_version": "1.6.2f1 (build 767.21d1)",
+  "e2c": {
+    "note": "Earth2Cities（Paradox modId 140919）。cache_osm 是它导入时读取的 OSM 文件；mod 更新后 `140919_13` 的序号可能变化，需按实际目录核对。",
+    "mod_id": "140919",
+    "cache_osm": "%USERPROFILE%\\AppData\\LocalLow\\Colossal Order\\Cities Skylines II\\.cache\\Mods\\pdx_mods\\140919_13\\overpass_roads.osm"
+  },
+  "heightmaps_dir": "%USERPROFILE%\\AppData\\LocalLow\\Colossal Order\\Cities Skylines II\\Heightmaps",
+  "maps_dir": "%USERPROFILE%\\AppData\\LocalLow\\Colossal Order\\Cities Skylines II\\Maps",
+  "overlays_dir": "%USERPROFILE%\\AppData\\LocalLow\\Colossal Order\\Cities Skylines II\\Overlays",
+  "steamid": "<steamid64>"
+}

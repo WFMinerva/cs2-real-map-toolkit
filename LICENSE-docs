@@ -1,0 +1,20 @@
+# 文档与数据许可：CC BY-SA 4.0
+
+本仓 `shared/docs/`、`maps/*/docs/`、`maps/*/rail/*.json`、`docs/` 下的文档与数据，
+以及 README/NOTICE/AGENTS 中的说明性文字，采用
+**Creative Commons Attribution-ShareAlike 4.0 International（CC BY-SA 4.0）** 许可。
+
+- 许可全文：https://creativecommons.org/licenses/by-sa/4.0/legalcode
+- 人类可读摘要：https://creativecommons.org/licenses/by-sa/4.0/
+
+你可以自由分享与改编，但必须**署名**并以**相同方式共享**。
+
+## 为什么选 CC BY-SA 4.0
+
+本仓示例数据派生自 **OpenStreetMap**（ODbL）等开放数据；文档记录的是实测与互操作结论，
+希望他人能继续在此基础上完善。CC BY-SA 4.0 与 OSM 数据的共享要求相容。
+
+## 署名建议
+
+> 依兰 / 哈尔滨真实地图制作路径，来自 **cs2-real-map-toolkit**（作者 WFMinerva），CC BY-SA 4.0。
+> 地理数据来源署名见 `NOTICE.md`（Copernicus DEM / OpenStreetMap contributors / ESA WorldCover / NASA POWER）。

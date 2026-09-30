@@ -1,0 +1,89 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    HarbinBridgeLift —— 抬桥补充 Mod
+
+    存在的唯一理由：Earth2Cities v0.0.17 不读 OSM 的 bridge/tunnel 标签，
+    所有路都被压在地形高度上，导致
+      · 高架与其同名地面路重叠
+      · 跨江桥落在河床上 → 过水路面
+    这个 Mod 只做一件事：按 105_export_bridge_data.py 算好的高度场，
+    把该抬的路网节点抬起来，并写好 Game.Net.Elevation、挂 Updated 让游戏重建几何。
+
+    参考实现（同一个 Mod 自己的按钮）：Earth2Cities 的
+    RoadCleaner.OffsetTaggedImportedRoads —— 改 Node.m_Position + 平移 Curve.m_Bezier + 挂 Updated。
+
+    构建：
+      dotnet build -c Release
+    产物在 bin/Release/HarbinBridgeLift/，由 deploy 脚本拷进游戏 Mods 目录。
+  -->
+
+  <PropertyGroup>
+    <CsiiToolpath>$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH','EnvironmentVariableTarget.User'))</CsiiToolpath>
+    <UseOfficialSdk Condition="'$(UseOfficialSdk)' == '' And '$(CsiiToolpath)' != '' And Exists('$(CsiiToolpath)\Mod.props')">true</UseOfficialSdk>
+    <UseOfficialSdk Condition="'$(UseOfficialSdk)' == ''">false</UseOfficialSdk>
+  </PropertyGroup>
+
+  <Import Project="$(CsiiToolpath)\Mod.props"   Condition="'$(UseOfficialSdk)' == 'true'" />
+  <Import Project="$(CsiiToolpath)\Mod.targets" Condition="'$(UseOfficialSdk)' == 'true'" />
+
+  <PropertyGroup>
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>HarbinBridgeLift</AssemblyName>
+    <RootNamespace>HarbinBridgeLift</RootNamespace>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <NoWarn>CS0169;CS0649;CS1591;MSB3277</NoWarn>
+    <GamePath Condition="'$(GamePath)' == ''"><CS2_INSTALL></GamePath>
+    <ManagedPath>$(GamePath)\Cities2_Data\Managed</ManagedPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(UseOfficialSdk)' != 'true'">
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+  </PropertyGroup>
+
+  <Target Name="ReportBuildMode" BeforeTargets="BeforeBuild">
+    <Message Importance="high" Text="=== HarbinBridgeLift 构建模式: $(UseOfficialSdk) ===" />
+  </Target>
+
+  <ItemGroup Condition="'$(UseOfficialSdk)' == 'true'">
+    <Reference Include="Game"><Private>false</Private></Reference>
+    <Reference Include="Colossal.Core"><Private>false</Private></Reference>
+    <Reference Include="Colossal.Logging"><Private>false</Private></Reference>
+    <Reference Include="Colossal.Mathematics"><Private>false</Private></Reference>
+    <Reference Include="Colossal.IO.AssetDatabase"><Private>false</Private></Reference>
+    <Reference Include="Colossal.Localization"><Private>false</Private></Reference>
+    <Reference Include="Unity.Entities"><Private>false</Private></Reference>
+    <Reference Include="Unity.Collections"><Private>false</Private></Reference>
+    <Reference Include="Unity.Mathematics"><Private>false</Private></Reference>
+    <Reference Include="Unity.Burst"><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(UseOfficialSdk)' != 'true'">
+    <PackageReference Include="System.Memory" Version="4.5.5">
+      <ExcludeAssets>runtime</ExcludeAssets>
+      <Private>false</Private>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(UseOfficialSdk)' != 'true'">
+    <Reference Include="Game"><HintPath>$(ManagedPath)\Game.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Colossal.Logging"><HintPath>$(ManagedPath)\Colossal.Logging.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Colossal.Core"><HintPath>$(ManagedPath)\Colossal.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Colossal.Mathematics"><HintPath>$(ManagedPath)\Colossal.Mathematics.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Colossal.IO.AssetDatabase"><HintPath>$(ManagedPath)\Colossal.IO.AssetDatabase.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Colossal.Localization"><HintPath>$(ManagedPath)\Colossal.Localization.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Entities"><HintPath>$(ManagedPath)\Unity.Entities.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Collections"><HintPath>$(ManagedPath)\Unity.Collections.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Mathematics"><HintPath>$(ManagedPath)\Unity.Mathematics.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(ManagedPath)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>$(ManagedPath)\System.Runtime.CompilerServices.Unsafe.dll</HintPath><Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

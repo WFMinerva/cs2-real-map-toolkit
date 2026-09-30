@@ -1,0 +1,13 @@
+{
+  "prefab_name": "TrainStation01",
+  "prefab_index": 12690,
+  "prefab_version": 1,
+  "water_level_m": 92.5,
+  "trim_span": true,
+  "yaw_offset_deg": -90.0,
+  "lateral_m": 24.0,
+  "note": "S1 定稿（2026-09-30 本会话⑤报告）：TrainStation01=12690v1，含 PublicTransportStationData（客运过境站）+ SubNet/SubLane + BuildingTerraformData；index 只当线索，运行时按名解析（v16 纪律）。位置 = 现行线位 v8/v10 第 21 段（长 202.3 m）中点，垂距实测 0.0 m；数据 x/z/yaw 是**建筑原点**的位姿，实际落位再按 yaw_offset_deg 与 lateral_m 修正（见下）。S3 首放实测：横向 0.00 m / yaw 差 0.0° 全绿，但轨面 114.65 m 在高架上、站台在地面 → 机主定 A 抬站，y 显式 114.65。**v26 诊断**：只发建筑定义时站内 SubNet 为 0 条（只有外壳）。**v28 实测预制件带 19 条站内子网**，其中 16–18 号是月台轨 `Double Train Track`：本地曲线沿 **local X**、长 212 m、三条平行于 local z = −8.5 / −24 / −40 ⇒ 站台长轴是 local X（故 yaw_offset_deg = −90 把月台轨对到线路走向）；三条轨相对原点有侧向距离，取 lateral_m = 8.5 让**最近那条月台轨**压在线路上（要换中间/最远那条就改 24 / 40）。stations 行格式：[名字, x, z, yaw(, y)?]。",
+  "stations": [
+    ["依兰站", 3339.3, -4240.4, 44.90, 100.69]
+  ]
+}

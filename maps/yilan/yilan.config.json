@@ -1,0 +1,156 @@
+{
+  "map_id": "yilan",
+  "display_name": "依兰",
+  "status": "铁路轮（mod 铺轨）线位/高程剖面/两端对外连接已验收（rail_full_v10，未存档）；待办：修牡丹江桥 +9.93 m 鼓包（mod 同口径算 ground）、放依兰站、验收后另存档；押后：江面连续/不淹两岸细验收、流动性水源、发布。92.5 仍为 DEM 内估计值。已验收：地形/水位/路网 v3/北桥抬升/气候/资源四图/街名 v9（基线 yilan_base14）。",
+  "center": { "lon": 129.557, "lat": 46.315 },
+  "bounds": { "left": 129.463777, "right": 129.650223, "bottom": 46.250387, "top": 46.379613 },
+  "epsg": "EPSG:32652",
+  "playable": { "px": 4096, "m_per_px": 3.5 },
+  "world": { "px": 4096, "m_per_px": 14.0 },
+  "height_scale_m": 4096.0,
+  "sea_level_m": 92.5,
+  "water": {
+    "extract_bbox_swnw": [46.05, 129.15, 46.60, 129.95],
+    "classes": ["riverbank", "water", "reservoir", "wetland", "wetland_marsh", "wetland_swamp"],
+    "shore_model": {
+      "note": "建模参数：沿用社区默认 2.5m/10m/sine（非依兰实测水深，制作前需确认）",
+      "water_depth_m": 2.5,
+      "riparian_m": 10.0,
+      "profile_sine": [0.024, 0.095, 0.206, 0.345, 0.5, 0.655, 0.794, 0.905, 0.976],
+      "surface_tol_m": 1.0
+    },
+    "world_classes": ["water", "reservoir", "riverbank", "wetland", "wetland_marsh", "wetland_swamp", "basin"],
+    "world_depth_m": 2.5,
+    "world_tol_m": 8.0,
+    "world_way_width_m": { "river": 70.0, "canal": 30.0, "stream": 12.0, "drain": 8.0 },
+    "riverbed_depth_below_sea_m": 2.0
+  },
+  "dem": {
+    "source": "Copernicus DEM GLO-30 (AWS open data)",
+    "source_water": "Geofabrik heilongjiang-latest-free.shp.zip / gis_osm_water_a_free_1.shp",
+    "tiles": ["N46_00_E129_00"]
+  },
+  "region_shp": "maps/yilan/data/osm_hlj",
+  "region_zip": "data_common/heilongjiang-latest-free.shp.zip",
+  "roads_bounds": { "left": 129.4638, "right": 129.6502, "bottom": 46.25061, "top": 46.37939 },
+  "roads_trim_m": 6500.0,
+  "roads_boundary_guard_m": 600.0,
+  "roads_overpass": {
+    "note": "取数口径：哈尔滨 FULL 实测反推的 E2C 下载语义（way(bbox)+全节点递归，bbox=bounds 外扩 pad_m）。类白名单在哈尔滨 7 类基础上增 motorway/motorway_link（机主 2026-09-30 要求哈同高速 G1011 进图并连边；E2C 程序集字符串表证实导入器识别 motorway）",
+    "endpoints": [
+      "https://overpass-api.de/api/interpreter",
+      "https://overpass.osm.ch/api/interpreter",
+      "https://overpass.osm.jp/api/interpreter"
+    ],
+    "pad_m": 2000.0,
+    "highway_classes": ["service", "primary", "trunk", "tertiary", "secondary", "residential", "unclassified", "motorway", "motorway_link"]
+  },
+  "roads_connector": {
+    "note": "对外连接干线（机主 2026-09-30 选定方案 c）：命中类不按 roads_trim_m 收边，裁到 半宽+boundary_margin_m；越 E2C IsNearBoundary 阈值(半宽-600)的路段由其换高速预制件并连到图边成对外连接。乡道(tertiary/unclassified 等)维持收边。无此块的图（哈尔滨）行为不变",
+    "match_highway": ["motorway", "trunk", "primary"],
+    "boundary_margin_m": 100.0
+  },
+  "railways": {
+    "note": "铁路轮（2026-09-29 机主定「先研究布置火车站的办法」）。E2C 只导公路不导铁路（实测其 dll 无 railway/Rail/Train 字面量，RoadPrefabResolver 把 train/track lane 明确排除），故铁路需另造。本块只负责取真实线位（97）；进图方式与预制件在后续轮次定，松花江铁路桥是否有 OSM 依据以本块取回的数据为准，不得凭空放置。",
+    "endpoints": [
+      "https://overpass-api.de/api/interpreter",
+      "https://overpass.osm.ch/api/interpreter",
+      "https://overpass.osm.jp/api/interpreter"
+    ],
+    "pad_m": 3000.0,
+    "railway_classes": ["rail", "light_rail", "narrow_gauge", "disused"],
+    "station_classes": ["station", "halt"]
+  },
+  "imagery": {
+    "note": "影像镶嵌图（98）：OSM 缺数据时（依兰铁路线、松花江铁路桥）用于判读与描摹，也作 Image Overlay 的参考底图。源 = Esri World Imagery XYZ；只读网络、产物进 products/imagery/ 当候选。",
+    "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    "zoom": 16,
+    "out_px": 4096,
+    "bbox_margin_m": 800.0,
+    "max_tiles": 4000,
+    "tile_delay_s": 0.05
+  },
+  "bridge_lift": { "clearance_m": 10.0, "ramp_length_m": 160.0, "min_c_m": 0.15, "match_radius_m": 6.0,
+    "densify_step_m": 10.0,
+    "densify_note": "2026-09-29 北桥第二轮实测：图内路网 2686 节点 vs OSM 缓存 2019 → CS2/E2C 把过长边细分插节点并按地形压低（北桥西北跨单边 1206 m），插节点落在 OSM 节点点位之间配不上 → 淹水段挂在插节点上，抬 OSM 节点视觉『没变化』。沿桥面折线每 10 m 布点（< 配对半径 6 m 的覆盖步长）兜住一切插节点",
+    "match_note": "2026-09-29 北桥实测：游戏内节点与 OSM 推导坐标偏移 0.4–2.4 m，2.5 m 半径时 12 点只配上 7 个（桥面中段下垂+南岸引道淹水=『部分抬起』）。6.0 = 实测最大偏移两倍余量，且小于本桥最小节点间距 11.6 m 的一半；mod 取 max(面板滑条, 本值)",
+    "restrict_near": { "lon": 129.53975, "lat": 46.33226, "radius_m": 1500,
+      "note": "只修北桥（依兰松花江大桥，OSM way 380070387 无名乡道桥）。机主 2026-09-30 实测：其余桥 CS2 自动立柱表现良好，不抬；下一座最近桥 way 933841054 距锚点 2290 m，1500 m 半径干净圈住。无此键=抬全部（哈尔滨口径）" } },
+  "files": {
+    "water_geojson": "maps/yilan/data/water_in_box.geojson",
+    "mask_npz": "maps/yilan/data/mask_playable.npz",
+    "playable_png": "maps/yilan/products/yilan_playable.png",
+    "world_png": "maps/yilan/products/yilan_world.png",
+    "build_meta": "maps/yilan/products/build_meta.json",
+    "preview_playable": "maps/yilan/products/preview_playable.png",
+    "preview_world": "maps/yilan/products/preview_world.png",
+    "verify_hillshade": "maps/yilan/products/verify_hillshade.png",
+    "river_edges": "maps/yilan/products/river_edges.json",
+    "world_river_edges": "maps/yilan/products/world_river_edges.json",
+    "roads_osm_full": "maps/yilan/data/roads/overpass_roads_FULL.osm",
+    "roads_trimmed": "maps/yilan/data/roads/overpass_roads_trimmed.osm",
+    "bridges_lift": "maps/yilan/bridge/bridges_lift.json",
+    "nasa_daily": "maps/yilan/products/nasa_daily_yilan.json",
+    "climate_table": "maps/yilan/docs/依兰气候-填值表.md",
+    "climate_doc": "maps/yilan/docs/依兰气候-填值对照表.docx",
+    "street_names": "maps/yilan/bridge/street_names.json",
+    "railways_osm": "maps/yilan/data/rail/overpass_railways_FULL.osm",
+    "imagery_mosaic": "maps/yilan/products/imagery/yilan_imagery_z16_candidate.png",
+    "resource_maps_game": "maps/yilan/products/resource_maps_game"
+  },
+  "notes": {
+    "sea_level": "92.5 m = DEM 数据内水面高程估计（尖峰法 + OSM 水面交叉验证 36.2%，唯一显著吻合峰；99.8–100.1 m 假峰与 OSM 水面 0% 吻合已排除）。不是当地水位实测；与 2013 报道通航水位 98.5–101.6 m（黄海程）存在量级差，基准/时点不同，入游戏后以『江面连续、不淹两岸』微调为准。",
+    "riverbed_depth_below_sea_m": "建模参数（与岸线模型主槽一致），不是实测水深；判定水位 = 海平面 − 2.0，由脚本计算，无占位绝对值。",
+    "bounds": "线性等距外推（与哈尔滨同法）：Δlon = 7168/(111320·cos46.315°)，Δlat = 7168/110940",
+    "railway": "哈佳铁路依兰站权威坐标（OSM 节点 5697139268）= 46.2771813,129.6000269（站房/广场点，在轨道西北侧 200–300 m，不能当轨道锚点）。铁路进图已定 mod 铺轨（原「机主手铺 A」作废）；线位与验收参数见 rail/README.md。松花江上无铁路桥、牡丹江上有（影像实证），不得凭空放置"
+  },
+  "preview_annotations": {
+    "builtup": { "name": "县城建成区(推算范围,约10km²)", "west": 129.540, "east": 129.585, "south": 46.305, "north": 46.345 },
+    "points": [
+      { "name": "依兰站(哈佳铁路)", "lon": 129.60036, "lat": 46.27681, "kind": "station", "label_at": "e" },
+      { "name": "依兰松花江大桥", "lon": 129.53975, "lat": 46.33226, "kind": "bridge", "label_at": "w" },
+      { "name": "依兰牡丹江大桥(G221)", "lon": 129.54373, "lat": 46.31180, "kind": "bridge", "label_at": "w" },
+      { "name": "倭肯河大桥(G221)", "lon": 129.58121, "lat": 46.32767, "kind": "bridge", "label_at": "e" },
+      { "name": "倭肯河老桥", "lon": 129.58184, "lat": 46.32692, "kind": "bridge", "label_at": "se" },
+      { "name": "牡丹江口", "lon": 129.53694, "lat": 46.32250, "kind": "mouth", "label_at": "w" },
+      { "name": "倭肯河口(推算±1km)", "lon": 129.58500, "lat": 46.34000, "kind": "mouth", "label_at": "ne" },
+      { "name": "松花江", "lon": 129.56500, "lat": 46.34500, "kind": "river", "label_at": "n" },
+      { "name": "牡丹江", "lon": 129.52800, "lat": 46.27800, "kind": "river", "label_at": "w" },
+      { "name": "倭肯河", "lon": 129.60400, "lat": 46.28800, "kind": "river", "label_at": "e" },
+      { "name": "G1011依兰收费站(单一来源)", "lon": 129.58052, "lat": 46.30465, "kind": "toll", "label_at": "e" }
+    ]
+  },
+  "climate": {
+    "note": "气候/资源轮（2026-09-29 启动，哈尔滨已验证口径）：NASA POWER 逐日 2015–2024 @ 地图中心；口径与回归锚见 shared/pipeline/65_climate_table.py 头注",
+    "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+    "years": [2015, 2024],
+    "parameters": ["T2M", "T2M_MAX", "T2M_MIN", "PRECTOTCORR", "CLOUD_AMT"],
+    "prec_day_mm": 1.0,
+    "cloud_day_pct": 50.0,
+    "prec_deviation": 30.0,
+    "turbulence": 0.2
+  },
+  "ref_layers_zip": "<old-workspace>/data/heilongjiang-latest-free.shp.zip",
+  "ref_layers_note": "旧工作区只读档案里缓存的 Geofabrik 黑龙江全省 free shp zip；54 只读提取 landuse/buildings 到本图框内，不改旧区",
+  "fertile_worldcover": {
+    "note": "肥沃图新源轮（2026-09-29 机主选定）：54 的 OSM landuse 在依兰框内 farmland=0（Geofabrik 覆盖缺口），改取 ESA WorldCover 10m 2021 v200（AWS open data，COG 按窗口直读，不整幅下载）。权重/阈值全在本块，脚本不写死；69 先出候选+对照，机主批准后才 --deploy 覆盖 54 版并同步游戏 Overlays。",
+    "url_template": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_{tile}_Map.tif",
+    "tile": "N45E129",
+    "class_weights": { "10": 0, "20": 40, "30": 110, "40": 255, "50": 0, "60": 0, "80": 0, "90": 30, "95": 0, "100": 0 },
+    "class_weight_note": "10 树=0（木材属森林资源，不是肥沃）/20 灌木=40/30 草地=110（牧草）/40 耕地=255（主体）/50 建成=0 另按占比压制/60 裸地=0/80 水体=0/90 草本湿地=30",
+    "builtup_frac_threshold": 0.24,
+    "builtup_damp": 0.25,
+    "out_dir": "maps/yilan/products/fertile_worldcover"
+  },
+  "street_names": {
+    "note": "2026-09-29 机主报『街名不对』根因：E2C 不读 OSM name 标签（dll 字符串表只有 highway/ref）→ 全路主题默认花名。解 = 68 出段中点→真名 JSON + mod 批量 NameSystem.SetCustomName（官方 API，进存档）。OSM 无名 way 不发射（现实也无名，花名正常）",
+    "highway_classes": ["service", "primary", "trunk", "tertiary", "secondary", "residential", "unclassified", "motorway", "motorway_link"],
+    "name_fallback_ref": true,
+    "match_radius_m": 6.0,
+    "min_component_edges": 2,
+    "unnamed_label": "无名路",
+    "split_multi_name": true,
+    "vote_note": "v9 起判决改为「按节点连通性分组」：每条聚合的成员边先逐边配最近名字点，无名的边向相邻边扩散补齐；一条聚合里出现多组不同街名就地拆分（克隆聚合实体+重挂成员边，照官方 advanced-road-naming）；组边数 < min_component_edges 的判为无名（防一处误配改名半条路）；没有任何名字证据的组写 unnamed_label。阈值与标签都进本文件，不写死在 mod 里。"
+  },
+  "deploy": { "auto_deploy_heightmaps": false }
+}

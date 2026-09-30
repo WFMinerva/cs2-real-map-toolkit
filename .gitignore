@@ -1,0 +1,35 @@
+# 环境与构建产物
+.venv/
+__pycache__/
+*.py[cod]
+[Bb]in/
+[Oo]bj/
+*.user
+.vs/
+
+# 本机配置（用 config/game.example.json 复制成自己的）
+config/game.json
+*.local.json
+
+# 大体积 / 派生物：本仓只放"实现路径"，不放数据与地图产物
+*.cok
+*.npz
+*.tif
+*.shp
+*.shx
+*.dbf
+*.prj
+*.zip
+*.7z
+data_common/
+maps/*/data/dem/
+maps/*/data/osm_hlj/
+maps/*/products/
+maps/*/saves_backup/
+maps/*/game_side/
+
+# 临时 / 日志（含 mod 实测报告）
+*.log
+*.part
+tmp/
+*.tmp

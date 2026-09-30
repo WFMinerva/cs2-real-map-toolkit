@@ -1,0 +1,20 @@
+# 文本按平台归一，二进制原样
+* text=auto
+
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.webp   binary
+*.gif    binary
+*.ico    binary
+*.pdf    binary
+*.cok    binary
+*.npz    binary
+*.tif    binary
+*.shp    binary
+*.dbf    binary
+*.zip    binary
+*.dll    binary
+*.pdb    binary
+*.so     binary
+*.bundle binary
